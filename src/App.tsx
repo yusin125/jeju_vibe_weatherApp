@@ -6,6 +6,7 @@ import { CurrentWeatherCard } from './components/CurrentWeatherCard';
 import { AirQualityCard } from './components/AirQualityCard';
 import { HourlyForecast } from './components/HourlyForecast';
 import { DailyForecast } from './components/DailyForecast';
+import { ChatBot } from './components/ChatBot';
 import { useWeather } from './hooks/useWeather';
 import type { TemperatureUnit } from './types';
 
@@ -77,6 +78,8 @@ export default function App() {
         onClose={() => setIsSearchOpen(false)}
         onSelect={changeCity}
       />
+
+      <ChatBot city={city} data={data} unit={unit} />
     </div>
   );
 }
