@@ -60,7 +60,7 @@ export function ChatBot({ city, data, unit }: ChatBotProps) {
   return (
     <>
       {isOpen && (
-        <div className="fixed bottom-24 right-4 z-50 flex h-[560px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white sm:right-6">
+        <div className="fixed bottom-24 right-4 z-50 flex h-[560px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-3xl border border-white/40 bg-white/85 shadow-xl backdrop-blur-xl sm:right-6">
           <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3.5">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-500 text-white">

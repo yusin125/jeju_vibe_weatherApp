@@ -14,7 +14,7 @@ export function CurrentWeatherCard({ city, current, today, unit }: CurrentWeathe
   const { label, icon: Icon } = getWeatherInfo(current.weatherCode, current.isDay);
 
   return (
-    <section className="flex h-full flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6">
+    <section className="flex h-full flex-col justify-between rounded-3xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-slate-400">

@@ -7,6 +7,7 @@ import { AirQualityCard } from './components/AirQualityCard';
 import { HourlyForecast } from './components/HourlyForecast';
 import { DailyForecast } from './components/DailyForecast';
 import { ChatBot } from './components/ChatBot';
+import { WeatherBackground } from './components/WeatherBackground';
 import { useWeather } from './hooks/useWeather';
 import type { TemperatureUnit } from './types';
 
@@ -16,7 +17,13 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen">
+      <WeatherBackground
+        weatherCode={data?.current.weatherCode ?? 0}
+        isDay={data?.current.isDay ?? true}
+        temperature={data?.current.temperature ?? 20}
+        windSpeed={data?.current.windSpeed ?? 10}
+      />
       <div className="mx-auto max-w-6xl space-y-5 px-4 py-6 sm:px-6 sm:py-8">
         <Header
           city={city}
@@ -28,7 +35,7 @@ export default function App() {
         />
 
         {error && (
-          <div className="flex items-center justify-between gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3">
+          <div className="flex items-center justify-between gap-3 rounded-2xl border border-rose-200/60 bg-rose-50/85 px-4 py-3 backdrop-blur-xl">
             <div className="flex items-center gap-2 text-sm font-semibold text-rose-600">
               <AlertCircle className="h-4.5 w-4.5 shrink-0" />
               {error}
@@ -45,7 +52,7 @@ export default function App() {
         )}
 
         {!data && loading && (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-slate-200 bg-white py-24 text-slate-400">
+          <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-white/40 bg-white/70 py-24 text-slate-400 backdrop-blur-xl">
             <Loader2 className="h-6 w-6 animate-spin" />
             <p className="text-sm font-medium">날씨 정보를 불러오는 중...</p>
           </div>

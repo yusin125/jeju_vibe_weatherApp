@@ -62,7 +62,7 @@ export function CitySearch({ isOpen, onClose, onSelect }: CitySearchProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 shadow-xl"
+        className="w-full max-w-md rounded-2xl border border-white/40 bg-white/85 p-4 shadow-xl backdrop-blur-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">

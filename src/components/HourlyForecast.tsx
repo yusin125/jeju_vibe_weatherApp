@@ -10,7 +10,7 @@ interface HourlyForecastProps {
 
 export function HourlyForecast({ hourly, unit }: HourlyForecastProps) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6">
+    <section className="rounded-3xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
       <div className="flex items-center gap-2">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-slate-500">
           <Clock className="h-4.5 w-4.5" />

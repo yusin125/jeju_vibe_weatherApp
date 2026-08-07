@@ -7,7 +7,7 @@ interface UnitToggleProps {
 
 export function UnitToggle({ unit, onChange }: UnitToggleProps) {
   return (
-    <div className="flex items-center rounded-full border border-slate-200 bg-white p-1 text-sm font-semibold">
+    <div className="flex items-center rounded-full border border-white/40 bg-white/70 p-1 text-sm font-semibold shadow-sm shadow-slate-900/5 backdrop-blur-xl">
       <button
         type="button"
         onClick={() => onChange('celsius')}
