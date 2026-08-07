@@ -1,6 +1,6 @@
-import { Droplets, Sunrise, Sunset, Umbrella, Wind } from 'lucide-react';
-import type { City, CurrentWeather, DailyWeather, TemperatureUnit } from '@/types';
-import { formatTemperature, formatTime } from '@/lib/format';
+import { CircleDot, CloudFog, Droplets, Gauge, Sunrise, Sunset, Umbrella, Wind } from 'lucide-react';
+import type { AirQuality, City, CurrentWeather, DailyWeather, TemperatureUnit } from '@/types';
+import { formatTemperature, formatTime, getPm10Level, getPm25Level } from '@/lib/format';
 import { getWeatherInfo } from '@/lib/weatherCode';
 
 interface CurrentWeatherCardProps {
@@ -8,14 +8,15 @@ interface CurrentWeatherCardProps {
   current: CurrentWeather;
   today?: DailyWeather;
   unit: TemperatureUnit;
+  airQuality: AirQuality | null;
 }
 
-export function CurrentWeatherCard({ city, current, today, unit }: CurrentWeatherCardProps) {
+export function CurrentWeatherCard({ city, current, today, unit, airQuality }: CurrentWeatherCardProps) {
   const { label, icon: Icon } = getWeatherInfo(current.weatherCode, current.isDay);
 
   return (
-    <section className="flex h-full flex-col justify-between rounded-3xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
-      <div className="flex items-start justify-between gap-4">
+    <section className="flex h-full flex-col justify-between rounded-3xl border border-white/40 bg-white/70 p-4 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
+      <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-sm font-semibold text-slate-400">
             {[city.admin1, city.country].filter(Boolean).join(' · ') || '현재 위치'}
@@ -41,7 +42,7 @@ export function CurrentWeatherCard({ city, current, today, unit }: CurrentWeathe
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         <StatItem icon={Droplets} label="습도" value={`${Math.round(current.humidity)}%`} />
         <StatItem
           icon={Umbrella}
@@ -52,6 +53,34 @@ export function CurrentWeatherCard({ city, current, today, unit }: CurrentWeathe
         {today && <StatItem icon={Sunrise} label="일출" value={formatTime(today.sunrise)} />}
         {today && <StatItem icon={Sunset} label="일몰" value={formatTime(today.sunset)} />}
       </div>
+
+      {airQuality && (
+        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <StatItem
+            icon={CircleDot}
+            label="초미세먼지 PM2.5"
+            value={airQuality.pm2_5 != null ? `${Math.round(airQuality.pm2_5)}µg/m³` : '정보 없음'}
+            valueClassName={
+              airQuality.pm2_5 != null
+                ? getPm25Level(airQuality.pm2_5).colorClass.replace('bg-', 'text-')
+                : undefined
+            }
+          />
+          <StatItem
+            icon={CloudFog}
+            label="미세먼지 PM10"
+            value={airQuality.pm10 != null ? `${Math.round(airQuality.pm10)}µg/m³` : '정보 없음'}
+            valueClassName={
+              airQuality.pm10 != null
+                ? getPm10Level(airQuality.pm10).colorClass.replace('bg-', 'text-')
+                : undefined
+            }
+          />
+          {airQuality.usAqi != null && (
+            <StatItem icon={Gauge} label="US AQI" value={`${Math.round(airQuality.usAqi)}`} />
+          )}
+        </div>
+      )}
     </section>
   );
 }
@@ -60,17 +89,19 @@ function StatItem({
   icon: Icon,
   label,
   value,
+  valueClassName = 'text-slate-800',
 }: {
   icon: typeof Droplets;
   label: string;
   value: string;
+  valueClassName?: string;
 }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-xl bg-slate-50 px-3 py-2.5">
+    <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-2.5 py-2">
       <Icon className="h-4.5 w-4.5 shrink-0 text-slate-400" />
       <div className="min-w-0">
         <p className="text-[11px] font-medium text-slate-400">{label}</p>
-        <p className="truncate text-sm font-bold text-slate-800">{value}</p>
+        <p className={`truncate text-sm font-bold ${valueClassName}`}>{value}</p>
       </div>
     </div>
   );

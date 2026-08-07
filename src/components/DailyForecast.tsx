@@ -12,21 +12,21 @@ export function DailyForecast({ daily, unit }: DailyForecastProps) {
   const days = daily.slice(0, 7);
 
   return (
-    <section className="rounded-3xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
+    <section className="rounded-3xl border border-white/40 bg-white/70 p-4 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
       <div className="flex items-center gap-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-slate-500">
-          <CalendarDays className="h-4.5 w-4.5" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-50 text-slate-500">
+          <CalendarDays className="h-4 w-4" />
         </div>
         <h2 className="text-sm font-bold text-slate-900">7일 예보</h2>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-7">
         {days.map((day, i) => {
           const { label, icon: Icon } = getWeatherInfo(day.weatherCode, true);
           return (
             <div
               key={day.date}
-              className="flex flex-col items-center gap-2 rounded-2xl bg-slate-50 px-2 py-4 text-center"
+              className="flex flex-col items-center gap-1.5 rounded-2xl bg-slate-50 px-2 py-3 text-center"
             >
               <span className="text-sm font-bold text-slate-800">{formatDayLabel(day.date, i)}</span>
               <span className="text-[11px] text-slate-400">{formatMonthDay(day.date)}</span>

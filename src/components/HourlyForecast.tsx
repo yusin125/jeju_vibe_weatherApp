@@ -10,21 +10,21 @@ interface HourlyForecastProps {
 
 export function HourlyForecast({ hourly, unit }: HourlyForecastProps) {
   return (
-    <section className="rounded-3xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
+    <section className="rounded-3xl border border-white/40 bg-white/70 p-4 shadow-lg shadow-slate-900/5 backdrop-blur-xl">
       <div className="flex items-center gap-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-slate-500">
-          <Clock className="h-4.5 w-4.5" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-50 text-slate-500">
+          <Clock className="h-4 w-4" />
         </div>
         <h2 className="text-sm font-bold text-slate-900">시간별 예보 (24시간)</h2>
       </div>
 
-      <div className="no-scrollbar mt-5 flex gap-3 overflow-x-auto pb-1">
+      <div className="no-scrollbar mt-3 flex gap-2 overflow-x-auto pb-1">
         {hourly.map((hour, i) => {
           const { icon: Icon } = getWeatherInfo(hour.weatherCode, hour.isDay);
           return (
             <div
               key={hour.time}
-              className="flex min-w-[68px] shrink-0 flex-col items-center gap-2 rounded-2xl bg-slate-50 px-2 py-3.5"
+              className="flex min-w-[64px] shrink-0 flex-col items-center gap-1.5 rounded-2xl bg-slate-50 px-2 py-2.5"
             >
               <span className="text-xs font-semibold text-slate-400">
                 {i === 0 ? '지금' : formatHour(hour.time)}

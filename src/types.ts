@@ -39,6 +39,12 @@ export interface DailyWeather {
   sunset: string;
 }
 
+export interface GeoRegion {
+  name: string;
+  admin1: string | null;
+  country: string;
+}
+
 export interface AirQuality {
   pm2_5: number | null;
   pm10: number | null;
